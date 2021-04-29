@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('hello Flutter'),
+        title: Text('hello Flutter App'),
         backgroundColor: Colors.black12,
         //actions: [],
       ),
