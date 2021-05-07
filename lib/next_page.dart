@@ -20,7 +20,7 @@ class NextPage extends StatelessWidget { // 画面はStatelessWidget
             children: <Widget>[
               Text(name),
               Center(
-                child: RaisedButton(
+                child: ElevatedButton(
                   child: Text('戻る'),
                   onPressed: (){
                     // ここに押した後の動きを書く
