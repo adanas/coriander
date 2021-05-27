@@ -1,3 +1,5 @@
+import 'package:coriander/book_list_page.dart';
+import 'package:coriander/next_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'main_model.dart';
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text('Hello Flutter App Test'),
-            backgroundColor: Colors.black12,
+            //backgroundColor: Colors.black12,
             //actions: [],
           ),
           // notifyListenersを受けてConsumerが発火する
@@ -36,7 +38,13 @@ class MyApp extends StatelessWidget {
                       child: Text('ボタン'),
                       onPressed: () {
                         // modelのメソッドをcall
-                        model.changeTopText();
+                        //model.changeTopText();
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => BookList()),
+                        );
+
                       },
                     ),
                   ],

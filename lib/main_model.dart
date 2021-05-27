@@ -4,7 +4,7 @@ class MainModel extends ChangeNotifier {
   String topText = 'コリアンダー！';
 
   void changeTopText(){
-    topText = 'パクチー最高！';
+    topText = '最高パクチー最高！';
     notifyListeners();
   }
 
