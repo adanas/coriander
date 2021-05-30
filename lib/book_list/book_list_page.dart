@@ -29,6 +29,7 @@ class BookListPage extends StatelessWidget {
           }
         ),
 
+        // 本を追加ボタン
         floatingActionButton: Consumer<BookListModel>(builder: (context, model, child) {
             return FloatingActionButton(
               child: Icon(Icons.add),
