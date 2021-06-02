@@ -9,7 +9,7 @@ class BookListModel extends ChangeNotifier {
     final docs = await Firestore.instance.collection('books').getDocuments();
 
     // docs → booksに変換
-    final books = docs.documents.map((doc) => Book(doc['title'])).toList();
+    final books = docs.documents.map((doc) => Book(doc)).toList();
     this.books = books;
     notifyListeners();
 
