@@ -3,6 +3,8 @@ import 'package:coriander/book_list/book_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../book.dart';
+
 class BookListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,28 @@ class BookListPage extends StatelessWidget {
                             model.fetchBooks();
                           },
                         ),
+                        onLongPress: () async {
+                          await showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) {
+                            return AlertDialog(
+                              title:Text('${book.title} を削除しますか？'),
+                              actions: <Widget>[
+                                ElevatedButton(
+                                  child: Text('OK'),
+                                  onPressed: () async {
+                                    Navigator.of(context).pop();
+
+                                    // 削除処理
+                                    await deleteBook(context, model, book);
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                          );
+                        },
                       ),
                   )
               .toList();
@@ -64,3 +88,36 @@ class BookListPage extends StatelessWidget {
     );
   }
 }
+
+Future deleteBook(BuildContext context, BookListModel model, Book book) async {
+  try {
+    await model.deleteBook(book); // 削除処理
+    await model.fetchBooks();     // 画面更新
+    print('delete ${book.title}');
+  } catch (e) {
+    await _showDialog(context, e.toString());
+    print(e.toString());
+  }
+}
+
+Future<void> _showDialog(BuildContext context, String title) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title:Text(title),
+          actions: <Widget>[
+            ElevatedButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+
+    return null;
+  }

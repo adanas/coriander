@@ -15,5 +15,9 @@ class BookListModel extends ChangeNotifier {
 
   }
 
+  // 削除処理
+  Future deleteBook(Book book) async {
+    await Firestore.instance.collection('books').document(book.documentId).delete();
+  }
 
 }
