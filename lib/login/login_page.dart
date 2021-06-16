@@ -1,3 +1,4 @@
+import 'package:coriander/book_list/book_list_page.dart';
 import 'package:coriander/login/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +45,11 @@ class LoginPage extends StatelessWidget {
                   onPressed: () async {
                     try {
                       await model.login();
-                      _showDialog(context, 'ログイン完了');
+                      //_showDialog(context, 'ログイン完了');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => BookListPage()),
+                      );
                     }
                     catch(e) {
                       _showDialog(context, e.toString());
