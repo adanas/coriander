@@ -28,6 +28,16 @@ class AddBookPage extends StatelessWidget {
         body: Consumer<AddBookModel>(
             builder: (context, model, child) {
               return Column(children: <Widget>[
+                SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: InkWell(
+                    onTap: () async {
+                      await model.showImagePicker();
+                    },
+                    child: model.imageFile != null ? Image.file(model.imageFile) : Container(color: Colors.grey,),
+                  ),
+                ),
                 TextField(
                   controller: textEditingController,
                   onChanged: (text){
@@ -40,13 +50,14 @@ class AddBookPage extends StatelessWidget {
                 ElevatedButton(
                   child: Text(isUpdate ? '更新する' : '追加する'),
                   onPressed: () async {
+                    model.startLoading();
                     if (isUpdate) {
                       await updateBook(model, context);
                     }
                     else {
                       await addBook(model, context);
                     }
-
+                    model.endLoading();
                   },
                 )
               ],
